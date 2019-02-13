@@ -170,7 +170,7 @@ Adapter.prototype.connect = function () {
           attempt(err);
         } else {
           log.info('Cannot connect to `%s` - all endpoints failed', this.name);
-          reject('No endpoints could be reached');
+          reject(err);
         }
       }
       if (attempted.indexOf(nextUri) < 0) {
@@ -178,7 +178,7 @@ Adapter.prototype.connect = function () {
           .then(onConnection.bind(this), onConnectionError.bind(this));
       } else {
         log.info('Cannot connect to `%s` - all endpoints failed', this.name);
-        reject('No endpoints could be reached');
+        reject(err);
       }
     }.bind(this);
     attempt();
